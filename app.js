@@ -8,6 +8,7 @@ app.use(cors());
 
 //routes
 const challengeRoute = require('./routes/v1/challenge.route');
+const userRoutes = require('./routes/v1/users.route');
 
 
 app.get("/", (req, res) => {
@@ -16,7 +17,8 @@ app.get("/", (req, res) => {
 
 // posting to database
 
-app.use('/api/v1/challenge', challengeRoute)
+app.use('/api/v1/challenge', challengeRoute);
+app.use('/api/v1/user', userRoutes);
 
 
 module.exports = app;
