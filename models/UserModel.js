@@ -93,8 +93,8 @@ userSchema.pre("save", function (next) {
         return next();
     }
     const password = this.password;
-
-    const hashedPassword = bcrypt.hashSync(password);
+    var salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
     this.password = hashedPassword;
     this.confirmPassword = undefined;
