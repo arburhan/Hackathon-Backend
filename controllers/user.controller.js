@@ -29,7 +29,6 @@ exports.login = async (req, res) => {
             })
         }
         const user = await userSigninService(email);
-        console.log(password);
         if (!user) {
             res.status(401).json({
                 status: "fail",
@@ -52,10 +51,12 @@ exports.login = async (req, res) => {
             });
         }
         const token = generateToken(user);
+        const { password: pwd, ...others } = user.toObject();
         res.status(200).json({
             status: "success",
             data: {
-                user, token
+                user: others,
+                token
             }
         })
 
@@ -66,5 +67,21 @@ exports.login = async (req, res) => {
             status: "fail",
             message: error.message
         })
+    }
+}
+
+exports.getMe = async (req, res) => {
+    try {
+        const user = await userSigninService(req.user?.email);
+        const { password: pwd, ...others } = user.toObject();
+        res.status(200).json({
+            status: "success",
+            data: others
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: "fail",
+            error,
+        });
     }
 }

@@ -1,12 +1,15 @@
 const express = require('express')
 const router = express.Router()
 const userController = require('../../controllers/user.controller');
+const verifyToken = require('../../middleware/verifyToken');
 
 
 router.route('/signup')
-    .post(userController.signUp)
+    .post(userController.signUp);
 router.route('/login')
-    .post(userController.login)
+    .post(userController.login);
+
+router.route('/me').get(verifyToken, userController.getMe);
 
 
 
