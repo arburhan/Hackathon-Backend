@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 // schema design
-const productSchema = mongoose.Schema({
+const challengeSchema = mongoose.Schema({
     challengeName: {
         type: String,
         required: [true, "Please provide a name for this challenge."],
@@ -21,14 +21,9 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    price: {
-        type: Number,
-        rquired: true,
-        min: [0, "Price can't be negative"],
-    },
     image: {
-        type: Image,
-        required: true
+        data: String,
+        contentType: String
     },
     levelType: {
         type: String,
@@ -46,7 +41,7 @@ const productSchema = mongoose.Schema({
 
 
 // mongoose middlewares for saving data: pre / post 
-
+/* 
 productSchema.pre('save', function (next) {
 
     //this -> 
@@ -57,7 +52,7 @@ productSchema.pre('save', function (next) {
 
     next()
 })
-
+ */
 
 //  productSchema.post('save',function(doc,next){
 //   console.log('After saving data');
@@ -65,13 +60,13 @@ productSchema.pre('save', function (next) {
 //   next()
 // })
 
-productSchema.methods.logger = function () {
+challengeSchema.methods.logger = function () {
     console.log(` Data saved for ${this.name}`);
 }
 
 
 // SCHEMA -> MODEL -> QUERY
 
-const Product = mongoose.model('Product', productSchema)
+const Challenge = mongoose.model('Challenge', challengeSchema)
 
-module.exports = Product;
+module.exports = Challenge;

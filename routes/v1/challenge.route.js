@@ -5,6 +5,7 @@ const challengeController = require('../../controllers/challenges.controller');
 
 router.route('/')
     .get(challengeController.getChallenges)
+    .post(challengeController.createChallenge)
 
 
 
